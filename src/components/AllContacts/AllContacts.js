@@ -5,14 +5,23 @@ const AllContacts = () => {
     const [contacts, setContacts] = useState([])
     const [displayContacts, setDisplayContacts] = useState([]) // for search
 
+    const [pageCount, setPageCount] = useState(0) // inititally set 0 
+
+    const [page, setPage] = useState(0)
+
+    const size = 5 // per page 5 data 
+
     useEffect(() =>{
-        fetch('http://localhost:5000/contacts')
+        fetch(`http://localhost:5000/contacts?page=${page}&&size=${size}`)
         .then(res=>res.json())
         .then(data=>{
-            setContacts(data) 
-            setDisplayContacts(data)
+            setContacts(data.contacts) 
+            setDisplayContacts(data.contacts)
+            const count = data.count 
+            const numberOfPage = Math.ceil(count/size)
+            setPageCount(numberOfPage)
         })
-    }, [])
+    }, [page]) //hitting the useEffect corresponding to change pages.
 
 
     // delete contact 
@@ -57,9 +66,9 @@ const AllContacts = () => {
     }
     return (
         <div>
-            <div className="container-fluid">
-                <h5 className='text-center mt-3 text-secondary'>Contacts Available: {contacts.length}</h5>
-                <div className="row">
+            <div className="container">
+                <h6 className='text-center mt-4 text-danger'>Contacts Available Per Page: {contacts.length}</h6>
+                <div className="row mt-3 ml-5">
                     <div className="col-lg-4">
                         <input type="text" onChange={handleSearchByCountry} className='form-control' placeholder='Search by Country'/>
                     </div>
@@ -72,8 +81,8 @@ const AllContacts = () => {
                 </div>
                 <div className="row mt-3">
                     <div className="col-lg-12">
-                    <table class="table table-striped">
-                            <thead class="thead-dark ">
+                    <table class="table">
+                            <thead class="thead-light ">
                                 <tr>
                                 <th scope="col">Photo</th>
                                 <th scope="col">First Name</th>
@@ -105,10 +114,10 @@ const AllContacts = () => {
                                                 <td>{cont.city}</td>
                                                 <td>{cont.state}</td>
                                                 <td>
-                                                    <Link to={`/update/${cont._id}`} className='btn btn-warning btn-sm'>Edit</Link> ||
+                                                    <Link to={`/update/${cont._id}`} className='btn btn-warning btn-sm'><i class="fas fa-user-edit"></i></Link> ||
                                                      <button   
                                                     onClick={()=> handleDeleteContact(cont._id)}
-                                                    className='btn btn-danger btn-sm'>Delete</button>
+                                                    className='btn btn-danger btn-sm'><i class="fas fa-user-times"></i></button>
                                                 </td>
 
                                             </tr>
@@ -118,6 +127,12 @@ const AllContacts = () => {
                                  
                                 </tbody>
                     </table>
+
+                    <div className="pagination">
+                        {
+                            [...Array(pageCount).keys()].map(index => <button onClick={()=> setPage(index)} className='btn btn-info btn-sm m-1'>{index}</button>)
+                        }
+                    </div>
                     </div>
                 </div>
             </div>

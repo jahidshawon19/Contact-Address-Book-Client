@@ -94,7 +94,7 @@ const UpdateContact = () => {
         <Navbar></Navbar>
            
             <div className="container">
-            <h5 className='text-center text-secondary mt-5'>Update Contact</h5>
+            <h4 className='text-center text-dark mt-5'>Update Contact</h4>
            
                 <div className="row">
                     <div className="col-lg-8">
