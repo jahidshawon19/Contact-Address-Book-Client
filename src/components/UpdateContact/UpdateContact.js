@@ -6,7 +6,7 @@ const UpdateContact = () => {
     const [contact, setContact] = useState({})
     const {id} = useParams() 
     useEffect(() =>{
-        const url = `http://localhost:5000/contacts/${id}`
+        const url = `https://aqueous-lake-31184.herokuapp.com/contacts/${id}`
         fetch(url)
         .then(res =>res.json())
         .then(data => setContact(data))
@@ -72,7 +72,7 @@ const UpdateContact = () => {
     }
 
     const handleUpdateContact = e =>{
-        const url = `http://localhost:5000/contacts/${id}`
+        const url = `https://aqueous-lake-31184.herokuapp.com/contacts/${id}`
         fetch(url, {
             method:'PUT',
             headers:{

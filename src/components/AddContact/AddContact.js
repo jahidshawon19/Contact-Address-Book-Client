@@ -28,7 +28,7 @@ const AddContact = () => {
 
         const newContact = {firstName, lastName, companyName, email, telePhoneNumber, mobilePhoneNumber, country, city,state, photoURL}
 
-        fetch('http://localhost:5000/contacts', {
+        fetch('https://aqueous-lake-31184.herokuapp.com/contacts', {
             method: 'POST',
             headers:{
                 'content-type':'application/json'

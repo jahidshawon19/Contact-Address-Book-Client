@@ -12,7 +12,7 @@ const AllContacts = () => {
     const size = 5 // per page 5 data 
 
     useEffect(() =>{
-        fetch(`http://localhost:5000/contacts?page=${page}&&size=${size}`)
+        fetch(`https://aqueous-lake-31184.herokuapp.com/contacts?page=${page}&&size=${size}`)
         .then(res=>res.json())
         .then(data=>{
             setContacts(data.contacts) 
@@ -26,7 +26,7 @@ const AllContacts = () => {
 
     // delete contact 
     const handleDeleteContact = id =>{
-        const url = `http://localhost:5000/contacts/${id}`
+        const url = `https://aqueous-lake-31184.herokuapp.com/contacts/${id}`
         fetch(url, {
             method: 'DELETE' 
         }) 
@@ -35,7 +35,7 @@ const AllContacts = () => {
             if(data.deletedCount > 0){
                 alert('Deleted Contact Successfully')
                 const restContacts = contacts.filter(cont => cont._id !== id)
-                setContacts(restContacts)
+                setDisplayContacts(restContacts)
             }
         })
     }
@@ -67,7 +67,7 @@ const AllContacts = () => {
     return (
         <div>
             <div className="container">
-                <h6 className='text-center mt-4 text-danger'>Contacts Available Per Page: {contacts.length}</h6>
+                <h6 className='text-center mt-4 text-danger'>Contacts Available Per Page: {displayContacts.length}</h6>
                 <div className="row mt-3 ml-5">
                     <div className="col-lg-4">
                         <input type="text" onChange={handleSearchByCountry} className='form-control' placeholder='Search by Country'/>
