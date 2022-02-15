@@ -30,5 +30,5 @@ https://github.com/jahidshawon19/Contact-Address-Book-Server
 
 ### LIve-Site
 
-https://goofy-hamilton-229744.netlify.app/
+https://determined-noether-2c2750.netlify.app/
 
