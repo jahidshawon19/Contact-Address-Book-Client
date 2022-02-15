@@ -4,6 +4,7 @@
 import Home from './components/Home/Home';
 import AddContact from './components/AddContact/AddContact'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import UpdateContact from './components/UpdateContact/UpdateContact';
 
 function App() {
   return (
@@ -23,6 +24,11 @@ function App() {
 
           <Route path="/addcontact">
             <AddContact></AddContact>
+          </Route>
+
+          
+          <Route path="/update/:id">
+            <UpdateContact></UpdateContact>
           </Route>
         </Switch>
       </Router>
